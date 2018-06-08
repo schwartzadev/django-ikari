@@ -57,10 +57,10 @@ then display them on a user dashboard that you more than likely already have.
 
  `pip install django-ikari`
 
-  In order to use application, add `ikari' to `INSTALLED_APPS` in
-  Django project `settings.py' file,
-  `ikari.middleware.DomainsMiddleware' to `MIDDLEWARE_CLASSES`
-  after `AuthenticationMiddleware', and configure application settings
+  In order to use application, add `ikari` to `INSTALLED_APPS` in
+  Django project `settings.py` file,
+  `ikari.middleware.DomainsMiddleware` to `MIDDLEWARE_CLASSES`
+  after `AuthenticationMiddleware`, and configure application settings
   described in the next section.
 
 ### 2 Settings
