@@ -150,40 +150,40 @@ You site model should at least have the following fields and methods:
 
 ### 3.1 Permissions
 
-* `can_set_custom_domain' enables setting a domain which is not suffixed
+* `can_set_custom_domain` enables setting a domain which is not suffixed
 with the `IKARI_SUBDOMAIN_ROOT` value.
-* `can_set_public_status' does the same for `is_public' field.
-* `can_set_active_status' does the same for `is_active' field.
+* `can_set_public_status` does the same for `is_public` field.
+* `can_set_active_status` does the same for `is_active` field.
 
 
 ### 4 Middleware
-`ikari.middleware.DomainsMiddleware' looks at
+`ikari.middleware.DomainsMiddleware` looks at
 `request.get_host()` and, if it matches any `ikari.Site` model
 instance:
-* sets `request.ikari_site' to that instance (it can be later used by
+* sets `request.ikari_site` to that instance (it can be later used by
   views and, with `request` context processor, in templates);
-* unless `request.ikari_site.is_public' is true, it immediately logs
+* unless `request.ikari_site.is_public` is true, it immediately logs
   out (and redirects to reverse URL lookup of
   `settings.IKARI_URL_ERROR_PRIVATE`) any `auth.User` that does not
-  satisfy this sites get_moderators() method;
-- if `IKARI_SITE_URLCONF' setting is set, sets
-  `request.urlconf' to its value, allowing single project to display
+  satisfy this sites `get_moderators()` method;
+- if `IKARI_SITE_URLCONF` setting is set, sets
+  `request.urlconf` to its value, allowing single project to display
   different URL hierarchies for main site and account sites;
-  *WARNING*: setting `request.urlconf' doesn't fit well with reverse
+  *WARNING*: setting `request.urlconf` doesn't fit well with reverse
   URL lookups (those will still be made against root urlconf),
   django-debug-toolbar, and probably other things as well. For
   maximum reliability, consider running two separate projects on
   single database: one for "main" site, other for account domains,
   or use single urlconf for both;
-- send signal `ikari.signals.site_request' and if any
+- send signal `ikari.signals.site_request` and if any
   receiver returns an instance of `HttpResponse`, returns this
   response instead of actual page.  This can be used for
   e.g. displaying error message and not allowing to log into expired
   accounts.
 
 If current domain doesn't match any of existing `ikari.Site` instances
-and is not `IKARI_MASTER_DOMAIN', middleware redirects user to
-`IKARI_MASTER_DOMAIN'.
+and is not `IKARI_MASTER_DOMAIN`, middleware redirects user to
+`IKARI_MASTER_DOMAIN`.
 
 
 ### 5 Views
